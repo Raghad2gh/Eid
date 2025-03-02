@@ -7,24 +7,26 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- الشاشة الأولى -->
     <div id="screen1">
         <h1>اكتب اسمك للتهنئة:</h1>
         <input type="text" id="username" placeholder="أدخل اسمك">
         <button onclick="goToScreen2()">التالي</button>
     </div>
 
+    <!-- الشاشة الثانية -->
     <div id="screen2" style="display: none;">
         <h1>اضغط لتفجير فرحة العيد!</h1>
         <button onclick="explode()">✨ اضغط هنا ✨</button>
     </div>
 
+    <!-- الشاشة الثالثة (الانفجار والتهنئة) -->
     <div id="screen3" style="display: none;">
         <h1 id="greeting"></h1>
-        <div class="explosion"></div>
+        <div id="explosion"></div>
         <div class="decorations">🎉🎊✨🌟</div>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
-
