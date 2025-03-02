@@ -1,91 +1,30 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>انفجار فرحة العيد</title>
-  <style>
-    body {
-      background-color: #2a0b4b;
-      color: white;
-      text-align: center;
-      font-family: Arial, sans-serif;
-    }
-    .container {
-      margin-top: 50px;
-    }
-    input, button {
-      padding: 10px;
-      font-size: 18px;
-      border-radius: 5px;
-      border: none;
-    }
-    button {
-      background-color: gold;
-      margin: 10px;
-      cursor: pointer;
-    }
-    .energy-bar {
-      width: 80%;
-      height: 30px;
-      background-color: gray;
-      border-radius: 15px;
-      margin: 20px auto;
-    }
-    .energy-fill {
-      width: 0%;
-      height: 100%;
-      background: linear-gradient(to right, gold, yellow);
-      transition: width 0.3s;
-    }
-    .message {
-      display: none;
-      font-size: 22px;
-      margin-top: 20px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عيدك سعيد</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>رمضان كريم</h1>
-    <p>نهنئكم بقدوم شهر رمضان المبارك، كل عام وأنتم بخير!</p>
-    
-    <input type="text" id="username" placeholder="أدخل اسمك">
-    <br>
-    <button onclick="startCharging()">ابدأ الشحن!</button>
-    
-    <div class="energy-bar">
-      <div class="energy-fill" id="energyFill"></div>
+    <div id="screen1">
+        <h1>اكتب اسمك للتهنئة:</h1>
+        <input type="text" id="username" placeholder="أدخل اسمك">
+        <button onclick="goToScreen2()">التالي</button>
     </div>
-    
-    <button id="chargeBtn" onclick="chargeEnergy()" style="display:none;">اشحن طاقة العيد!</button>
-    
-    <p class="message" id="message"></p>
-  </div>
 
-  <script>
-    let energy = 0;
-    let username = "";
+    <div id="screen2" style="display: none;">
+        <h1>اضغط لتفجير فرحة العيد!</h1>
+        <button onclick="explode()">✨ اضغط هنا ✨</button>
+    </div>
 
-    function startCharging() {
-      username = document.getElementById("username").value.trim();
-      if (username === "") {
-        alert("الرجاء إدخال اسمك أولاً!");
-        return;
-      }
-      document.getElementById("chargeBtn").style.display = "inline-block";
-    }
+    <div id="screen3" style="display: none;">
+        <h1 id="greeting"></h1>
+        <div class="explosion"></div>
+        <div class="decorations">🎉🎊✨🌟</div>
+    </div>
 
-    function chargeEnergy() {
-      if (energy < 100) {
-        energy += 10;
-        document.getElementById("energyFill").style.width = energy + "%";
-      }
-      if (energy >= 100) {
-        document.getElementById("message").style.display = "block";
-        document.getElementById("message").innerHTML = `انفجار من السعادة، ${username}! عيدك مبارك!`;
-      }
-    }
-  </script>
+    <script src="script.js"></script>
 </body>
 </html>
+
