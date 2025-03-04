@@ -3,30 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عيدك سعيد</title>
+    <title>تهنئة العيد - نادي الهندسة النووية</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- الشاشة الأولى -->
     <div id="screen1" class="screen">
-        <h1>اكتب اسمك للتهنئة:</h1>
-        <input type="text" id="username" placeholder="أدخل اسمك">
+        <h2>اكتب اسمك للبدء</h2>
+        <input type="text" id="username" placeholder="اكتب اسمك هنا">
         <button onclick="goToScreen2()">التالي</button>
     </div>
 
-    <!-- الشاشة الثانية -->
-    <div id="screen2" class="screen" style="display: none;">
-        <h1>اضغط لتفجير فرحة العيد!</h1>
-        <button onclick="explode()">✨ اضغط هنا ✨</button>
+    <div id="screen2" class="screen hidden">
+        <h2>اضغط على الدائرة لبدء العد</h2>
+        <div id="circle" onclick="startLoading()"></div>
+        <div id="progress-container">
+            <div id="progress-bar"></div>
+        </div>
     </div>
 
-    <!-- الشاشة الثالثة (الانفجار والتهنئة) -->
-    <div id="screen3" class="screen" style="display: none;">
-        <h1 id="greeting"></h1>
-        <div id="explosion"></div>
-        <div class="decorations">🎉🎊✨🌟</div>
+    <div id="explosion" class="hidden"></div> <!-- تأثير الانفجار -->
+
+    <div id="screen3" class="screen hidden">
+        <h2 id="final-message"></h2>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
