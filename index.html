@@ -3,31 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تهنئة العيد - نادي الهندسة النووية</title>
-    <link rel="stylesheet" href="style.css">
+    <title>تهنئة العيد</title>
+    <style>
+        body {
+            background-color: #2C0E3A; /* بنفسجي غامق */
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .hidden {
+            display: none;
+        }
+        .circle {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            margin-top: 20px;
+            color: black;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .explosion {
+            font-size: 40px;
+            color: yellow;
+            animation: explode 0.5s ease-in-out;
+        }
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.7; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+    </style>
 </head>
 <body>
-    <div id="screen1" class="screen">
-        <h2>اكتب اسمك للبدء</h2>
-        <input type="text" id="username" placeholder="اكتب اسمك هنا">
-        <button onclick="goToScreen2()">التالي</button>
+    <div class="container" id="step1">
+        <h2>اكتب اسمك</h2>
+        <input type="text" id="nameInput" placeholder="اسمك هنا">
+        <button onclick="startCounter()">التالي</button>
     </div>
 
-    <div id="screen2" class="screen hidden">
-        <h2>اضغط على الدائرة لبدء العد</h2>
-        <div id="circle" onclick="startLoading()"></div>
-        <div id="progress-container">
-            <div id="progress-bar"></div>
-        </div>
+    <div class="container hidden" id="step2">
+        <h2>اضغط على الدائرة لتعبئة العداد</h2>
+        <div class="circle" onclick="fillCounter()">+</div>
+        <h3 id="counter">0%</h3>
     </div>
 
-    <div id="explosion" class="hidden"></div> <!-- تأثير الانفجار -->
-
-    <div id="screen3" class="screen hidden">
-        <h2 id="final-message"></h2>
+    <div class="container hidden" id="step3">
+        <h2 id="finalMessage"></h2>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="script.js"></script>
+    <script>
+        let counterValue = 0;
+        function startCounter() {
+            const name = document.getElementById("nameInput").value;
+            if (name.trim() === "") {
+                alert("الرجاء إدخال اسمك");
+                return;
+            }
+            document.getElementById("step1").classList.add("hidden");
+            document.getElementById("step2").classList.remove("hidden");
+        }
+
+        function fillCounter() {
+            if (counterValue < 100) {
+                counterValue += 10;
+                document.getElementById("counter").innerText = counterValue + "%";
+            }
+            if (counterValue === 100) {
+                document.getElementById("step2").classList.add("hidden");
+                showExplosion();
+                setTimeout(() => {
+                    showFinalMessage();
+                }, 500);
+            }
+        }
+
+        function showExplosion() {
+            let explosion = document.createElement("div");
+            explosion.className = "explosion";
+            explosion.innerText = "💥";
+            document.body.appendChild(explosion);
+            setTimeout(() => explosion.remove(), 500);
+        }
+
+        function showFinalMessage() {
+            const name = document.getElementById("nameInput").value;
+            document.getElementById("finalMessage").innerText = `عيدكم مبارك يا ${name}! 🎉`;
+            document.getElementById("step3").classList.remove("hidden");
+        }
+    </script>
 </body>
 </html>
