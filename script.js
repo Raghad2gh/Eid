@@ -1,25 +1,37 @@
 function goToScreen2() {
-    let username = document.getElementById("username").value;
-    if (username.trim() === "") {
-        alert("الرجاء إدخال اسمك");
+    let name = document.getElementById("username").value;
+    if (name.trim() === "") {
+        alert("يرجى إدخال اسمك!");
         return;
     }
-    localStorage.setItem("username", username); // حفظ الاسم
-    document.getElementById("screen1").style.display = "none";
-    document.getElementById("screen2").style.display = "flex";
+    localStorage.setItem("username", name);
+    gsap.to("#screen1", { opacity: 0, duration: 0.5, onComplete: () => {
+        document.getElementById("screen1").classList.add("hidden");
+        document.getElementById("screen2").classList.remove("hidden");
+        gsap.from("#screen2", { opacity: 0, duration: 0.5 });
+    }});
 }
 
-function explode() {
-    document.getElementById("screen2").style.display = "none";
-    document.getElementById("screen3").style.display = "flex";
+function startLoading() {
+    let progressBar = document.getElementById("progress-bar");
+    gsap.to(progressBar, { width: "100%", duration: 2, onComplete: explodeEffect });
+}
 
-    let username = localStorage.getItem("username");
-    document.getElementById("greeting").innerHTML = `عيدك سعيد يا ${username}! 🎉🎊`;
-
+function explodeEffect() {
     let explosion = document.getElementById("explosion");
-    explosion.style.display = "block";
+    explosion.classList.remove("hidden");
 
-    setTimeout(() => {
-        explosion.style.display = "none";
-    }, 1000);
+    gsap.to(explosion, { scale: 3, opacity: 1, duration: 0.5, onComplete: () => {
+        gsap.to(explosion, { opacity: 0, duration: 0.3, onComplete: showFinalScreen });
+    }});
+}
+
+function showFinalScreen() {
+    document.getElementById("screen2").classList.add("hidden");
+    document.getElementById("screen3").classList.remove("hidden");
+
+    let name = localStorage.getItem("username");
+    document.getElementById("final-message").innerHTML = `✨ عيد مبارك يا ${name}! ✨`;
+
+    gsap.from("#final-message", { scale: 0, duration: 0.5, ease: "bounce.out" });
 }
