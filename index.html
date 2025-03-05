@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>عيدية نادي الهندسة النووية</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap'); /* استيراد خط مماثل */
+        
         body {
-            background: linear-gradient(135deg, #6a0dad, #ff1493); /* مطابقة للألوان */
+            background-color: #2C0E3A; /* بنفسجي غامق مطابق للملف */
             color: white;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Tajawal', sans-serif;
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -32,6 +34,8 @@
             border: none;
             text-align: center;
             margin-bottom: 15px;
+            width: 80%;
+            max-width: 300px;
         }
         .btn {
             padding: 12px 24px;
@@ -41,6 +45,11 @@
             border: none;
             cursor: pointer;
             border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background-color: #ffcc00;
         }
         .circle {
             width: 120px;
@@ -54,6 +63,11 @@
             color: black;
             cursor: pointer;
             font-weight: bold;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            transition: 0.3s;
+        }
+        .circle:hover {
+            transform: scale(1.1);
         }
         #counterBox {
             font-size: 32px;
@@ -63,6 +77,7 @@
             color: black;
             border-radius: 12px;
             min-width: 100px;
+            font-weight: bold;
         }
         .explosion {
             animation: explode 0.5s ease-out;
